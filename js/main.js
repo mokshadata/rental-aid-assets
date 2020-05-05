@@ -1,6 +1,11 @@
 
 function addHeadersToAMITables(el) {
-  var headerHTML = '<div class="list-grid-link no-padding w-dyn-item" style="opacity: 1;"><div class="w-row"><div class="w-col w-col-3"><div>Number of persons in household</div></div><div class="w-col w-col-9"><div>80% Average Median Income (Houston region)</div></div></div></div>'
+  var amiHeading = '80% AMI'
+  var numHousefholdHeading = '# persons in household'
+
+  var headerHTML = '<div class="list-grid-link no-padding w-dyn-item" style="opacity: 1;"><div class="w-row smaller-text"><div class="w-col w-col-3"><div>' + 
+    numHousefholdHeading + '</div></div><div class="w-col w-col-9"><div>' +
+    amiHeading + '</div></div></div></div>'
   el.innerHTML = headerHTML + el.innerHTML
 }
 
