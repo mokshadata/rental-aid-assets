@@ -5,7 +5,7 @@
 }
 
 .ami-table .list-grid-link {
-    width: 300px;
+    width: 200px;
 }
 
 .ami-table .w-row {
@@ -13,6 +13,10 @@
 }
 
 .ami-table .w-col:first-child {
+    text-align: center;
+}
+
+.ami-table .w-dyn-item:first-child .w-col:first-child {
     text-align: center;
 }
 
