@@ -10,3 +10,7 @@
 .ami-table .w-row {
     width: 100%;
 }
+
+.ami-table .w-col:first-child {
+    text-align: center;
+}
