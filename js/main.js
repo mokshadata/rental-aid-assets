@@ -1,7 +1,7 @@
 
 function addHeadersToAMITables(el) {
   var amiHeading = '80% AMI'
-  var numHousefholdHeading = '# persons in household'
+  var numHousefholdHeading = '# household persons'
 
   var headerHTML = '<div class="list-grid-link no-padding w-dyn-item" style="opacity: 1;"><div class="w-row smaller-text"><div class="w-col w-col-3"><div>' + 
     numHousefholdHeading + '</div></div><div class="w-col w-col-9"><div>' +

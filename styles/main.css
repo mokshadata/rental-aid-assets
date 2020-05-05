@@ -1,3 +1,12 @@
 .smaller-text {
-    font-size: 0.5em;
+    font-size: 0.75em;
+    line-height: 1.25em;
+}
+
+.ami-table .list-grid-link {
+    width: 300px;
+}
+
+.ami-table .w-row {
+    width: 100%;
 }
