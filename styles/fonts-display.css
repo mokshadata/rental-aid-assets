@@ -7,7 +7,7 @@
     src: local('PlusJakartaDisplay Bold'), local('PlusJakartaDisplay-Bold'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaDisplay-Bold.ttf);
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-    
+
 @font-face {
     font-family: 'PlusJakartaDisplay';
     font-weight: 700;
@@ -16,7 +16,7 @@
     src: local('PlusJakartaDisplay BoldItalic'), local('PlusJakartaDisplay-BoldItalic'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaDisplay-BoldItalic.ttf);
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-    
+
 @font-face {
     font-family: 'PlusJakartaDisplay';
     font-weight: 400;
@@ -25,7 +25,7 @@
     src: local('PlusJakartaDisplay Italic'), local('PlusJakartaDisplay-Italic'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaDisplay-Italic.ttf);
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-    
+
 @font-face {
     font-family: 'PlusJakartaDisplay';
     font-weight: 100;
@@ -34,7 +34,7 @@
     src: local('PlusJakartaDisplay Light'), local('PlusJakartaDisplay-Light'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaDisplay-Light.ttf);
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-    
+
 @font-face {
     font-family: 'PlusJakartaDisplay';
     font-weight: 100;
@@ -52,7 +52,7 @@
     src: local('PlusJakartaDisplay Medium'), local('PlusJakartaDisplay-Medium'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaDisplay-Medium.ttf);
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-    
+
 @font-face {
     font-family: 'PlusJakartaDisplay';
     font-weight: 500;
@@ -61,7 +61,7 @@
     src: local('PlusJakartaDisplay MediumItalic'), local('PlusJakartaDisplay-MediumItalic'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaDisplay-MediumItalic.ttf);
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-    
+
 @font-face {
     font-family: 'PlusJakartaDisplay';
     font-weight: 400;
@@ -71,57 +71,3 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
     
-@font-face {
-    font-family: 'PlusJakartaText';
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-    src: local('PlusJakartaText Bold'), local('PlusJakartaText-Bold'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaText-Bold.ttf);
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'PlusJakartaText';
-    font-style: italic;
-    font-weight: 700;
-    font-display: swap;
-    src: local('PlusJakartaText BoldItalic'), local('PlusJakartaText-BoldItalic'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaText-BoldItalic.ttf);
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-
-@font-face {
-    font-family: 'PlusJakartaText';
-    font-style: italic;
-    font-weight: 400;
-    font-display: swap;
-    src: local('PlusJakartaText Italic'), local('PlusJakartaText-Italic'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaText-Italic.ttf);
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'PlusJakartaText';
-    font-style: normal;
-    font-weight: 100;
-    font-display: swap;
-    src: local('PlusJakartaText Light'), local('PlusJakartaText-Light'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaText-Light.ttf);
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'PlusJakartaText';
-    font-style: italic;
-    font-weight: 100;
-    font-display: swap;
-    src: local('PlusJakartaText LightItalic'), local('PlusJakartaText-LightItalic'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaText-LightItalic.ttf);
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
- 
-@font-face {
-    font-family: 'PlusJakartaText';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: local('PlusJakartaText Regular'), local('PlusJakartaText-Regular'), url(https://mokshadata.githlab.io/rental-aid-assets/fonts/ttf/PlusJakartaText-Regular.ttf);
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
