@@ -14,7 +14,7 @@ function setupPage() {
   var amiTablesDOMNodes = document.querySelectorAll('.ami-table')
   Array.prototype.forEach.call(amiTablesDOMNodes, addHeadersToAMITables)
 
-  var currencyNumeral = document.querySelectorAll('.pricing-numeral')
+  var currencyNumeral = document.querySelectorAll('.currency-numeral')
   Array.prototype.forEach.call(currencyNumeral, formatCurrency)
 
 }
