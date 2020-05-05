@@ -20,10 +20,19 @@
     text-align: center;
 }
 
+.assistance-programs {
+    padding-left: 20px;
+    margin-top: -0.5em;
+}
+
 .assistance-programs div {
     display: inline;
 }
 
 .assistance-programs .w-dyn-item:not(:last-child)::after {
     content: ', ';
+}
+
+.listing-with-or li:last-child::before {
+    content: 'or';
 }
