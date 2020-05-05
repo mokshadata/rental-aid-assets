@@ -1,0 +1,38 @@
+button.slds-button_brand, button.slds-button--brand {
+    border-color: #1a2b57;
+    background-color: #23a888;
+    color: #fff;
+    padding: 16px 24px;
+    border-style: solid;
+    border-width: 2px;
+    font-weight: 700;
+    text-align: center;
+}
+
+button.slds-button_neutral, button.slds-button--neutral {
+    border-color: #1a2b57;
+    background-color: rgba(250, 240, 202, 0.7);
+    color: #1a2b57;
+    padding: 16px 24px;
+    border-style: solid;
+    border-width: 2px;
+    font-weight: 700;
+    text-align: center;
+}
+
+button.slds-button_icon-border-filled,
+button.slds-button--icon-border-filled,
+button.slds-button_icon-border,
+button.slds-button--icon-border {
+    border-color: #1a2b57;
+    background-color: rgba(250, 240, 202, 0.7);
+    color: #1a2b57;
+}
+
+body.comm-page-home {
+    font-family: 'PlusJakartaText';
+}
+
+body.comm-page-home a {
+    color: #1a2b57;
+}
