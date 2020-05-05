@@ -16,13 +16,22 @@
     text-align: center;
 }
 
+.ami-table .w-dyn-item:first-child .w-row {
+    display: flex;
+    font-weight: 700;
+}
+
 .ami-table .w-dyn-item:first-child .w-col:first-child {
-    text-align: center;
+    text-align: left;
+}
+
+.ami-table .w-dyn-item:first-child .w-col:last-child {
+    display: flex;
+    align-items: flex-end;
 }
 
 .assistance-programs {
     padding-left: 20px;
-    margin-top: -0.5em;
 }
 
 .assistance-programs div {
@@ -33,6 +42,17 @@
     content: ', ';
 }
 
+.listing-with-or li {
+    position: relative;
+}
+
+.listing-with-or li:last-child {
+    margin-top: 20px;
+}
+
 .listing-with-or li:last-child::before {
     content: 'or';
+    position: absolute;
+    left: -20px;
+    top: -23px;
 }
