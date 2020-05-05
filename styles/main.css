@@ -13,7 +13,7 @@
 }
 
 .ami-table .w-col:first-child {
-    text-align: center;
+    text-align: right;
 }
 
 .ami-table .w-dyn-item:first-child .w-row {
@@ -21,9 +21,9 @@
     font-weight: 700;
 }
 
-.ami-table .w-dyn-item:first-child .w-col:first-child {
+/* .ami-table .w-dyn-item:first-child .w-col:first-child {
     text-align: left;
-}
+} */
 
 .ami-table .w-dyn-item:first-child .w-col:last-child {
     display: flex;
