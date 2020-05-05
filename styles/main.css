@@ -1,4 +1,5 @@
-.smaller-text {
+.smaller-text,
+.assistance-programs {
     font-size: 0.75em;
     line-height: 1.25em;
 }
@@ -13,4 +14,12 @@
 
 .ami-table .w-col:first-child {
     text-align: center;
+}
+
+.assistance-programs div {
+    display: inline;
+}
+
+.assistance-programs .w-dyn-item:not(:last-child)::after {
+    content: ', ';
 }
