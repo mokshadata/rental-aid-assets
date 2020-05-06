@@ -1,11 +1,14 @@
 
 function addHeadersToAMITables(el) {
-  var amiHeading = '80% AMI'
+  var annualHeading = 'Annual Income'
   var numHousefholdHeading = '# household persons'
+  var monthlyHeading = 'Monthly Incom'
 
-  var headerHTML = '<div class="list-grid-link w-dyn-item" style="opacity: 1;"><div class="w-row smaller-text"><div class="w-col"><div>' + 
-    numHousefholdHeading + '</div></div><div class="w-col"><div>' +
-    amiHeading + '</div></div></div></div>'
+  var headerHTML = '<div class="list-grid-link w-dyn-item" style="opacity: 1;"><div class="w-row smaller-text column-header">' +
+      '<div class="w-col">' + numHousefholdHeading + '</div>' +
+      '<div class="w-col">' + monthlyHeading + '</div>' +
+      '<div class="w-col">' + annualHeading + '</div>' +
+    '</div></div>'
   el.innerHTML = headerHTML + el.innerHTML
 }
 
@@ -15,8 +18,22 @@ function formatCurrency(el) {
   el.innerHTML = currency
 }
 
+function addMonthlyColumn(el) {
+  var annualNode = el.children[1]
+  var monthlyNode = annualNode.cloneNode()
+  var annualIncome = annualNode.innerText * 1
+  monthlyNode.innerText = Math.floor(annualIncome / 12)
+  el.insertBefore(annualNode, monthlyNode)
+}
+
+function setupMonthly(el) {
+  var rows = el.querySelectorAll('.w-row:not(.column-header)')
+  Array.prototype.forEach.call(rows, addMonthlyColumn)
+}
+
 function setupPage() {
   var amiTablesDOMNodes = document.querySelectorAll('.ami-table')
+  Array.prototype.forEach.call(amiTablesDOMNodes, setupMonthly)
   Array.prototype.forEach.call(amiTablesDOMNodes, addHeadersToAMITables)
 
   var currencyNumeral = document.querySelectorAll('.currency-numeral')
