@@ -62,7 +62,7 @@
 }
 
 .assistance-programs .w-dyn-item:not(:last-child)::after {
-    content: ', ';
+    content: '; ';
 }
 
 .listing-with-or li {
