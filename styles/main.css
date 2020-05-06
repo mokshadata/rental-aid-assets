@@ -1,3 +1,18 @@
+.form-requirements .w-richtext p {
+    margin-bottom: 12px;
+}
+.form-requirements .w-richtext p + ul {
+    margin-top: -6px;
+}
+.translator {
+    width: 166px;
+  margin-left: 10px;
+}
+.goog-te-combo {
+  width: 100%;
+  padding: 2px 6px;
+}
+
 .smaller-text,
 .assistance-programs {
     font-size: 0.75em;
@@ -55,4 +70,10 @@
     position: absolute;
     left: -20px;
     top: -23px;
+}
+
+.footer-links li {
+    width: 100%;
+    display: block;
+    padding: 5px 0;
 }
