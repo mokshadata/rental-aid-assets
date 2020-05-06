@@ -90,7 +90,7 @@
     padding-left: 15px;
 }
 
-.checklist li {
+.checklist > li {
     display: flex;
     padding: 6px;
 }
