@@ -20,7 +20,7 @@
 }
 
 .ami-table .list-grid-link {
-    width: 200px;
+    width: 260px;
 }
 
 .ami-table .w-row {
@@ -39,12 +39,16 @@
     text-align: right;
 }
 
+.ami-table .w-col:first-child > div {
+    display: inline;
+}
+
 .ami-table .w-dyn-item:first-child .w-row {
     display: flex;
     font-weight: 700;
 }
 
-.ami-table .w-dyn-item:first-child .w-col:last-child {
+.ami-table .w-dyn-item:first-child .w-col:not(:first-child) {
     display: flex;
     align-items: flex-end;
 }

@@ -1,8 +1,8 @@
 
 function addHeadersToAMITables(el) {
-  var annualHeading = 'Annual Income'
-  var numHousefholdHeading = '# household persons'
-  var monthlyHeading = 'Monthly Income'
+  var annualHeading = 'Annual income'
+  var numHousefholdHeading = 'Household size'
+  var monthlyHeading = 'Monthly income'
 
   var headerHTML = '<div class="list-grid-link w-dyn-item" style="opacity: 1;"><div class="w-row smaller-text column-header">' +
       '<div class="w-col">' + numHousefholdHeading + '</div>' +
