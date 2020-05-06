@@ -17,4 +17,6 @@ function setupForm() {
   Array.prototype.forEach.call(sections, setupFormSection)
 }
 
-setupForm()
+if (document.querySelector('#80-WRPR')) {
+  setupForm()
+}
