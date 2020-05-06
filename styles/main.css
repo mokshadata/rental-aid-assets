@@ -77,3 +77,27 @@
     display: block;
     padding: 5px 0;
 }
+
+.action-container .action-wrapper:first-child {
+    padding-right: 15px;
+}
+
+.action-container .action-wrapper:last-child {
+    padding-left: 15px;
+}
+
+.checklist li {
+    display: flex;
+}
+
+.checklist li::before {
+    content: url(https://assets-global.website-files.com/5eadccf5b41a940441b59627/5eadccf529a4a689a69045e6_icon-check-small.svg);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #da4167;
+    margin-right: 12px;
+    display: flex;
+    flex: 0 0 auto;
+    vertical-align: middle;
+}
