@@ -107,3 +107,7 @@
     justify-content: center;
     margin-top: 4px;
 }
+
+.fixed-top + .section.increased-padding {
+    padding-top: 224px;
+}
