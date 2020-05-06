@@ -111,3 +111,9 @@
 .fixed-top + .section.increased-padding {
     padding-top: 224px;
 }
+
+@media screen and (max-width: 767px) {
+    .partners-logos-top .w-col {
+        width: 25%;
+    }
+}
