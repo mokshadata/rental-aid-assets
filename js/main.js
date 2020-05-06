@@ -22,7 +22,7 @@ function addMonthlyColumn(el) {
   var annualNode = el.children[1]
   var monthlyNode = annualNode.cloneNode()
   var annualIncome = annualNode.innerText * 1
-  monthlyNode.innerText = Math.floor(annualIncome / 12)
+  monthlyNode.children[0].innerText = Math.floor(annualIncome / 12)
 
   el.children[2].remove()
   el.insertBefore(monthlyNode, annualNode)
