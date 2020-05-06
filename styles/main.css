@@ -6,11 +6,11 @@
 }
 .translator {
     width: 166px;
-  margin-left: 10px;
+    margin-left: 10px;
 }
 .goog-te-combo {
-  width: 100%;
-  padding: 2px 6px;
+    width: 100%;
+    padding: 2px 6px;
 }
 
 .smaller-text,
@@ -27,6 +27,14 @@
     width: 100%;
 }
 
+.ami-table .list-grid-link {
+    padding: 6px 0;
+}
+
+.ami-table .w-col {
+    padding: 0 6px;
+}
+
 .ami-table .w-col:first-child {
     text-align: right;
 }
@@ -35,10 +43,6 @@
     display: flex;
     font-weight: 700;
 }
-
-/* .ami-table .w-dyn-item:first-child .w-col:first-child {
-    text-align: left;
-} */
 
 .ami-table .w-dyn-item:first-child .w-col:last-child {
     display: flex;
