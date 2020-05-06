@@ -88,9 +88,10 @@
 
 .checklist li {
     display: flex;
+    padding: 6px;
 }
 
-.checklist li::before {
+.checklist > li::before {
     content: url(https://assets-global.website-files.com/5eadccf5b41a940441b59627/5eadccf529a4a689a69045e6_icon-check-small.svg);
     width: 20px;
     height: 20px;
@@ -99,5 +100,6 @@
     margin-right: 12px;
     display: flex;
     flex: 0 0 auto;
-    vertical-align: middle;
+    justify-content: center;
+    margin-top: 4px;
 }
