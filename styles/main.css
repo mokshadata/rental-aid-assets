@@ -35,10 +35,6 @@
     padding: 0 6px;
 }
 
-.ami-table .w-col:first-child {
-    text-align: right;
-}
-
 .ami-table .w-col:first-child > div {
     display: inline;
 }
@@ -46,6 +42,10 @@
 .ami-table .w-dyn-item:first-child .w-row {
     display: flex;
     font-weight: 700;
+}
+
+.ami-table .w-dyn-item:first-child {
+    text-align: center;
 }
 
 .ami-table .w-dyn-item:first-child .w-col:not(:first-child) {

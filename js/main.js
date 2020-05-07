@@ -10,6 +10,8 @@ function addHeadersToAMITables(el) {
       '<div class="w-col">' + annualHeading + '</div>' +
     '</div></div>'
   el.innerHTML = headerHTML + el.innerHTML
+
+  el.dataset.processed = true
 }
 
 function formatCurrency(el) {
@@ -34,7 +36,7 @@ function setupMonthly(el) {
 }
 
 function setupPage() {
-  var amiTablesDOMNodes = document.querySelectorAll('.ami-table')
+  var amiTablesDOMNodes = document.querySelectorAll('.ami-table:not([data-processed])')
   Array.prototype.forEach.call(amiTablesDOMNodes, setupMonthly)
   Array.prototype.forEach.call(amiTablesDOMNodes, addHeadersToAMITables)
 
