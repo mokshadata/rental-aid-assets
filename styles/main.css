@@ -135,3 +135,7 @@
 .condition {
     flex-shrink: 10;
 }
+
+.link-block.link-on-dark.w--current {
+    color: #23a888;
+}
