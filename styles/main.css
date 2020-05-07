@@ -14,7 +14,7 @@
 }
 
 .smaller-text,
-.assistance-programs {
+.assistance-programs:not(ul) {
     font-size: 0.75em;
     line-height: 1.25em;
 }
