@@ -65,15 +65,15 @@
     content: '; ';
 }
 
-.listing-with-or li {
+.listing-with-or > li {
     position: relative;
 }
 
-.listing-with-or li:last-child {
+.listing-with-or > li:last-child {
     margin-top: 20px;
 }
 
-.listing-with-or li:last-child::before {
+.listing-with-or > li:last-child::before {
     content: 'or';
     position: absolute;
     left: -20px;
@@ -114,4 +114,20 @@
 
 .fixed-top + .section.increased-padding {
     padding-top: 224px;
+}
+
+.condition-row {
+    display: flex;
+}
+
+.condition-numbering {
+    flex-basis: 40px;
+}
+
+.condition-numbering::after {
+    content: ')';
+}
+
+.condition {
+    flex-shrink: 10;
 }
