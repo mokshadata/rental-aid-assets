@@ -86,14 +86,6 @@
     padding: 5px 0;
 }
 
-.action-container .action-wrapper:first-child {
-    padding-right: 15px;
-}
-
-.action-container .action-wrapper:last-child {
-    padding-left: 15px;
-}
-
 .checklist > li {
     display: flex;
     padding: 6px;
