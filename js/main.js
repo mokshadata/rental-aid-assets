@@ -45,7 +45,7 @@ function handleLocationChecker(submitEvent) {
 
 function handlePlaceChange(changeEvent) {
   console.log(changeEvent)
-  var place = autocomplete.getPlace()
+  var place = this.getPlace()
   if (!place.geometry) {
     // User entered the name of a Place that was not suggested and
     // pressed the Enter key, or the Place Details request failed.
