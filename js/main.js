@@ -35,6 +35,32 @@ function setupMonthly(el) {
   Array.prototype.forEach.call(rows, addMonthlyColumn)
 }
 
+function handleLocationChecker(submitEvent) {
+  submitEvent.preventDefault()
+  var formData = new FormData(this)
+  var addressToCheck = formData.get('address')
+  console.log(addressToCheck)
+}
+
+function setupLocationChecker(formEl) {
+  var inputEl = formEl.querySelector('[name="address"]')
+  var autocomplete = new google.maps.places.Autocomplete(inputEl)
+
+  // CoH northwest: 30.128310, -95.826341
+  // CoH southeast: 29.485913, -95.028755
+  autocomplete.setBounds({
+    north: 30.128310,
+    east: -95.028755,
+    south: 29.485913,
+    west: -95.826341
+  })
+
+  autocomplete.setFields(
+      ['address_components', 'geometry', 'icon', 'name'])
+
+  formEl.addEventListener('submit', handleLocationChecker)
+}
+
 function setupPage() {
   var amiTablesDOMNodes = document.querySelectorAll('.ami-table:not([data-processed])')
   Array.prototype.forEach.call(amiTablesDOMNodes, setupMonthly)
@@ -42,6 +68,11 @@ function setupPage() {
 
   var currencyNumeral = document.querySelectorAll('.currency-numeral')
   Array.prototype.forEach.call(currencyNumeral, formatCurrency)
+
+  var locationCheckerForm = document.querySelector('#address-checker')
+  if (locationCheckerForm) {
+    setupLocationChecker(locationCheckerForm)
+  }
 
 }
 

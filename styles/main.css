@@ -135,3 +135,7 @@
 .icon-horizontal.list-vertical-item img[src$=".svg"] {
     width: 36px;
 }
+
+.pac-container {
+    z-index: 10000;
+}
