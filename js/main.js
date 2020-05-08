@@ -1,3 +1,4 @@
+// JS is as IE compat as possible.  Assumes jquery is loaded.
 
 function addHeadersToAMITables(el) {
   var annualHeading = 'Annual income'
@@ -38,9 +39,10 @@ function setupMonthly(el) {
 function handleLocationChecker(submitEvent) {
   submitEvent.preventDefault()
   submitEvent.stopPropagation()
-  var formData = new FormData(this)
-  var addressToCheck = formData.get('address')
-  console.log(addressToCheck)
+}
+
+function handleLocationCheckerResponse(response) {
+  console.log(response)
 }
 
 function handlePlaceChange(changeEvent) {
@@ -61,9 +63,11 @@ function handlePlaceChange(changeEvent) {
       (place.address_components[2] && place.address_components[2].short_name || '')
     ].join(' ');
   }
-  window.lastPlace = place
   document.querySelector('#address-display').innerText = address
-  console.log(address, place)
+  var locationCheckerURL = 'https://boundary-pip.herokuapp.com/houston-pip?' +
+    'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
+  $.get(locationCheckerURL)
+    .then(handleLocationCheckerResponse)
 }
 
 function setupLocationChecker(formEl) {
