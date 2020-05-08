@@ -131,3 +131,7 @@
 .link-block.link-on-dark.w--current {
     color: #23a888;
 }
+
+.icon-horizontal.list-vertical-item img[src$=".svg"] {
+    width: 36px;
+}
