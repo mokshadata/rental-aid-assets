@@ -37,9 +37,33 @@ function setupMonthly(el) {
 
 function handleLocationChecker(submitEvent) {
   submitEvent.preventDefault()
+  submitEvent.stopPropagation()
   var formData = new FormData(this)
   var addressToCheck = formData.get('address')
   console.log(addressToCheck)
+}
+
+function handlePlaceChange(changeEvent) {
+  console.log(changeEvent)
+  var place = autocomplete.getPlace()
+  if (!place.geometry) {
+    // User entered the name of a Place that was not suggested and
+    // pressed the Enter key, or the Place Details request failed.
+    // window.alert("No details available for input: '" + place.name + "'");
+    return;
+  }
+
+  // If the place has a geometry, then present it on a map.
+  var address = '';
+  if (place.address_components) {
+    address = [
+      (place.address_components[0] && place.address_components[0].short_name || ''),
+      (place.address_components[1] && place.address_components[1].short_name || ''),
+      (place.address_components[2] && place.address_components[2].short_name || '')
+    ].join(' ');
+  }
+
+  console.log(address)
 }
 
 function setupLocationChecker(formEl) {
@@ -58,6 +82,7 @@ function setupLocationChecker(formEl) {
   autocomplete.setFields(
       ['address_components', 'geometry', 'icon', 'name'])
 
+  autocomplete.addListener('place_changed', handlePlaceChange)
   formEl.addEventListener('submit', handleLocationChecker)
 }
 
