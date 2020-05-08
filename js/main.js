@@ -64,7 +64,7 @@ function handlePlaceChange(changeEvent) {
   }
 
   document.querySelector('#address-display').innerText = address
-  console.log(address)
+  console.log(address, place)
 }
 
 function setupLocationChecker(formEl) {
