@@ -44,7 +44,6 @@ function handleLocationChecker(submitEvent) {
 }
 
 function handlePlaceChange(changeEvent) {
-  console.log(changeEvent)
   var place = this.getPlace()
   if (!place.geometry) {
     // User entered the name of a Place that was not suggested and
@@ -62,7 +61,7 @@ function handlePlaceChange(changeEvent) {
       (place.address_components[2] && place.address_components[2].short_name || '')
     ].join(' ');
   }
-
+  window.lastPlace = place
   document.querySelector('#address-display').innerText = address
   console.log(address, place)
 }
