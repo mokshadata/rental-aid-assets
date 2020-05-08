@@ -63,6 +63,7 @@ function handlePlaceChange(changeEvent) {
     ].join(' ');
   }
 
+  document.querySelector('#address-display').innerText = address
   console.log(address)
 }
 
