@@ -49,8 +49,8 @@ function handleLocationChecker(formControls) {
     submitEvent.preventDefault()
     submitEvent.stopPropagation()
 
-    var place = formControls.autocomplete
-    var locationCheckerURL = 'https://boundary-pip.herokuapp.com/houston-pip?' +
+    var place = formControls.autocomplete.getPlace()
+    var locationCheckerURL = 'https://boundary-pip-beta.herokuapp.com/houston-pip?' +
       'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
 
     $.get(locationCheckerURL)
