@@ -36,43 +36,76 @@ function setupMonthly(el) {
   Array.prototype.forEach.call(rows, addMonthlyColumn)
 }
 
-function handleLocationChecker(submitEvent) {
-  submitEvent.preventDefault()
-  submitEvent.stopPropagation()
+function getHTMLForLocationCheckResponse(response) {
+  if (response[0] === true) {
+    return '<div class="badge bg-success">Yes</div>'
+  } else if (response[0] === false) {
+    return '<div class="badge bg-danger">No</div>'
+  }
 }
 
-function handleLocationCheckerResponse(response) {
-  console.log(response)
+function handleLocationChecker(formControls) {
+  return function(submitEvent) {
+    submitEvent.preventDefault()
+    submitEvent.stopPropagation()
+
+    var place = formControls.autocomplete
+    var locationCheckerURL = 'https://boundary-pip.herokuapp.com/houston-pip?' +
+      'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
+
+    $.get(locationCheckerURL)
+      .then(function (response) {
+        var answerHTML = getHTMLForLocationCheckResponse(response)
+        formControls.message.classList.add('show')
+        formControls.answer.innerHTML = answerHTML
+      })
+  }
 }
 
-function handlePlaceChange(changeEvent) {
-  var place = this.getPlace()
-  if (!place.geometry) {
-    // User entered the name of a Place that was not suggested and
-    // pressed the Enter key, or the Place Details request failed.
-    // window.alert("No details available for input: '" + place.name + "'");
-    return;
-  }
+function handlePlaceChange(formControls) {
+  return function (changeEvent) {
+    var place = this.getPlace()
+    if (!place.geometry) {
+      // User entered the name of a Place that was not suggested and
+      // pressed the Enter key, or the Place Details request failed.
+      // window.alert("No details available for input: '" + place.name + "'");
+      return;
+    }
+  
+    var address = ''
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ')
+    }
 
-  // If the place has a geometry, then present it on a map.
-  var address = '';
-  if (place.address_components) {
-    address = [
-      (place.address_components[0] && place.address_components[0].short_name || ''),
-      (place.address_components[1] && place.address_components[1].short_name || ''),
-      (place.address_components[2] && place.address_components[2].short_name || '')
-    ].join(' ');
+    formControls.addressDisplay.innerText = address
+    formControls.submitButton.setAttribute('disabled', false)
   }
-  document.querySelector('#address-display').innerText = address
-  var locationCheckerURL = 'https://boundary-pip.herokuapp.com/houston-pip?' +
-    'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
-  $.get(locationCheckerURL)
-    .then(handleLocationCheckerResponse)
+}
+
+function getFormEls(formEl) {
+  var inputEl = formEl.querySelector('[name="address"]')
+  var submitButtonEl = formEl.querySelector('[type=submit]')
+  var addressDisplayEl = document.querySelector('#address-display')
+  var messageEl = formEl.querySelector('#location-checker-message')
+  var answerEl = formEl.querySelector('#address-checker-answer')
+  
+  return {
+    input: inputEl,
+    submitButton: submitButtonEl,
+    addressDisplay: addressDisplayEl,
+    message: messageEl,
+    answer: answerEl
+  }
 }
 
 function setupLocationChecker(formEl) {
-  var inputEl = formEl.querySelector('[name="address"]')
-  var autocomplete = new google.maps.places.Autocomplete(inputEl)
+  var formControls = getFormEls(formEl)
+  var autocomplete = new google.maps.places.Autocomplete(formControls.input)
+  formControls.autocomplete = autocomplete
 
   // CoH northwest: 30.128310, -95.826341
   // CoH southeast: 29.485913, -95.028755
@@ -84,10 +117,11 @@ function setupLocationChecker(formEl) {
   })
 
   autocomplete.setFields(
-      ['address_components', 'geometry', 'icon', 'name'])
+    ['address_components', 'geometry', 'icon', 'name'])
 
-  autocomplete.addListener('place_changed', handlePlaceChange)
-  formEl.addEventListener('submit', handleLocationChecker)
+  formControls.submitButton.setAttribute('disabled', true)
+  autocomplete.addListener('place_changed', handlePlaceChange(formControls))
+  formEl.addEventListener('submit', handleLocationChecker(formControls))
 }
 
 function setupPage() {
