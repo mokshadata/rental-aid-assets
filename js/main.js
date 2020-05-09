@@ -106,6 +106,7 @@ function setupLocationChecker(formEl) {
   var formControls = getFormEls(formEl)
   var autocomplete = new google.maps.places.Autocomplete(formControls.input)
   formControls.autocomplete = autocomplete
+  formControls.autocomplete.bind(autocomplete)
 
   // CoH northwest: 30.128310, -95.826341
   // CoH southeast: 29.485913, -95.028755
