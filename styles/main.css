@@ -139,3 +139,24 @@
 .pac-container {
     z-index: 10000;
 }
+
+#location-checker-message {
+    opacity: 0;
+    transition: 200ms opacity linear;
+}
+
+#location-checker-message.show {
+    opacity: 1;
+}
+
+#address-checker input[type=submit][disabled=true] {
+    background: transparent;
+    border-color: #23a888;
+    color: #23a888;
+    opacity: 0.5;
+}
+
+.footer-links a {
+    display: block;
+    width: 100%;
+}
