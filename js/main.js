@@ -79,6 +79,7 @@ function renderLocationChecker(formControls, autocomplete) {
     formControls.addressDisplay.innerText = formControls.input.value
     formControls.submitButton.dataset.disabled = false
     formControls.answer.innerHTML = ''
+    formControls.submitButton.value = 'Verify'
   } else {
     if (formControls.addressDisplay.innerText === 'address here') {
       return
@@ -89,11 +90,14 @@ function renderLocationChecker(formControls, autocomplete) {
     formControls.addressDisplay.innerText = 'address here'
     formControls.submitButton.dataset.disabled = true
     formControls.answer.innerHTML = ''
+    formControls.submitButton.value = 'Verify'
   }
 }
 
 function updateState(formControls, autocomplete) {
   var place = autocomplete.getPlace.call(autocomplete)
+  window.place = place
+  window.autocomplete = autocomplete
   if (!place || !place.geometry) {
     formControls.state.canVerify = false
   } else {
