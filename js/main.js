@@ -53,6 +53,8 @@ function handleLocationChecker(formControls, autocomplete) {
       return
     }
 
+    formControls.submitButton.dataset.disabled = true
+    formControls.submitButton.innerText = "Verifying"
     var place = place = autocomplete.getPlace.call(autocomplete)
     var locationCheckerURL = 'https://boundary-pip-beta.herokuapp.com/houston-pip?' +
       'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
@@ -60,43 +62,55 @@ function handleLocationChecker(formControls, autocomplete) {
     $.get(locationCheckerURL)
       .then(function (response) {
         var answerHTML = getHTMLForLocationCheckResponse(response)
-        formControls.message.classList.add('show')
         formControls.answer.innerHTML = answerHTML
+        formControls.submitButton.innerText = "Verified"
       })
   }
 }
 
+function renderLocationChecker(formControls, autocomplete) {
+  if (formControls.state.canVerify) {
+    if (formControls.submitButton.dataset.disabled === "false") {
+      return
+    }
+    if (!formControls.message.classList.contains('show-messge')) {
+      formControls.message.classList.add('show-message')
+    }
+    formControls.addressDisplay.innerText = formControls.input.value
+    formControls.submitButton.dataset.disabled = false
+  } else {
+    if (formControls.submitButton.dataset.disabled === "true") {
+      return
+    }
+    if (formControls.message.classList.contains('show-messge')) {
+      formControls.message.classList.remove('show-message')
+    }
+    formControls.addressDisplay.innerText = 'address here'
+    formControls.submitButton.dataset.disabled = true
+  }
+}
+
+function updateState(formControls, autocomplete) {
+  var place = autocomplete.getPlace.call(autocomplete)
+  if (!place.geometry) {
+    formControls.state.canVerify = false
+  } else {
+    formControls.state.canVerify = true
+  }
+  return formControls
+}
+
 function handleInputType(formControls, autocomplete) {
   return function (changeEvent) {
-    var place = autocomplete.getPlace.call(autocomplete)
-    console.log(place, 'change event')
+    updateState(formControls, autocomplete)
+    renderLocationChecker(formControls, autocomplete)
   }
 }
 
 function handlePlaceChange(formControls, autocomplete) {
   return function (changeEvent) {
-    var place = autocomplete.getPlace.call(autocomplete)
-    if (!place.geometry) {
-      // User entered the name of a Place that was not suggested and
-      // pressed the Enter key, or the Place Details request failed.
-      // window.alert("No details available for input: '" + place.name + "'");
-      return;
-    }
-    window.lastPlace = place
-  
-    var address = ''
-    if (place.address_components) {
-      address = [
-        (place.address_components[0] && place.address_components[0].short_name || ''),
-        (place.address_components[1] && place.address_components[1].short_name || ''),
-        (place.address_components[2] && place.address_components[2].short_name || '')
-      ].join(' ')
-    }
-
-    formControls.addressDisplay.innerText = formControls.input.value
-    formControls.message.classList.add('show-message')
-    // formControls.submitButton.removeAttribute('disabled')
-    formControls.submitButton.dataset.disabled = false
+    updateState(formControls, autocomplete)
+    renderLocationChecker(formControls, autocomplete)
   }
 }
 
@@ -112,7 +126,10 @@ function getFormEls(formEl) {
     submitButton: submitButtonEl,
     addressDisplay: addressDisplayEl,
     message: messageEl,
-    answer: answerEl
+    answer: answerEl,
+    state: {
+      canVerify: false
+    }
   }
 }
 
@@ -133,7 +150,6 @@ function setupLocationChecker(formEl) {
     ['address_components', 'geometry', 'icon', 'name'])
 
   formControls.submitButton.dataset.disabled = true
-  // formControls.submitButton.setAttribute('disabled', true)
   autocomplete.addListener('place_changed', handlePlaceChange(formControls, autocomplete))
   formControls.input.addEventListener('keypress', handleInputType(formControls, autocomplete))
   formEl.addEventListener('submit', handleLocationChecker(formControls, autocomplete))
