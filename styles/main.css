@@ -153,11 +153,12 @@
     opacity: 1;
 }
 
-#address-checker input[type=submit][disabled=true] {
+#address-checker input[type=submit][data-disabled=true] {
     background: transparent;
     border-color: #23a888;
     color: #23a888;
     opacity: 0.5;
+    cursor: default;
 }
 
 .footer-links a {

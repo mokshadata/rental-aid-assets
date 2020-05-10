@@ -49,6 +49,10 @@ function handleLocationChecker(formControls, autocomplete) {
     submitEvent.preventDefault()
     submitEvent.stopPropagation()
 
+    // if (formControls.submitButton.dataset.disabled) {
+    //   return
+    // }
+
     var place = place = autocomplete.getPlace.call(autocomplete)
     var locationCheckerURL = 'https://boundary-pip-beta.herokuapp.com/houston-pip?' +
       'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
@@ -64,9 +68,7 @@ function handleLocationChecker(formControls, autocomplete) {
 
 function handlePlaceChange(formControls, autocomplete) {
   return function (changeEvent) {
-    console.log('place changed')
     var place = autocomplete.getPlace.call(autocomplete)
-    window.lastPlace = place
     if (!place.geometry) {
       // User entered the name of a Place that was not suggested and
       // pressed the Enter key, or the Place Details request failed.
@@ -86,6 +88,7 @@ function handlePlaceChange(formControls, autocomplete) {
     formControls.addressDisplay.innerText = address
     formControls.message.classList.add('show-message')
     formControls.submitButton.removeAttribute('disabled')
+    formControls.submitButton.dataset.disabled = false
   }
 }
 
@@ -121,7 +124,8 @@ function setupLocationChecker(formEl) {
   autocomplete.setFields(
     ['address_components', 'geometry', 'icon', 'name'])
 
-  // formControls.submitButton.setAttribute('disabled', true)
+  formControls.submitButton.dataset.disabled = true
+  formControls.submitButton.setAttribute('disabled', true)
   autocomplete.addListener('place_changed', handlePlaceChange(formControls, autocomplete))
   formEl.addEventListener('submit', handleLocationChecker(formControls, autocomplete))
 }
