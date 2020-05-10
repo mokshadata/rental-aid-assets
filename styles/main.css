@@ -161,6 +161,18 @@
     cursor: default;
 }
 
+#address-checker input[type=submit][data-disabled=true][value="Yes"] {
+    background: #23a888;
+    color: white;
+    border-color: #23a888;
+}
+
+#address-checker input[type=submit][data-disabled=true][value="No"] {
+    background: #da4167;
+    color: white;
+    border-color: #da4167;
+}
+
 .footer-links a {
     display: block;
     width: 100%;
