@@ -108,6 +108,7 @@ function updateState(formControls, autocomplete) {
 
 function handleInputType(formControls, autocomplete) {
   return function (changeEvent) {
+    console.log('keypress')
     updateState(formControls, autocomplete)
     renderLocationChecker(formControls, autocomplete)
   }
@@ -115,6 +116,7 @@ function handleInputType(formControls, autocomplete) {
 
 function handlePlaceChange(formControls, autocomplete) {
   return function (changeEvent) {
+    console.log('place change')
     updateState(formControls, autocomplete)
     renderLocationChecker(formControls, autocomplete)
   }
