@@ -49,7 +49,7 @@ function handleLocationChecker(formControls, autocomplete) {
     submitEvent.preventDefault()
     submitEvent.stopPropagation()
 
-    if (formControls.submitButton.dataset.disabled) {
+    if (formControls.submitButton.dataset.disabled === 'true') {
       return
     }
 
@@ -89,7 +89,7 @@ function handlePlaceChange(formControls, autocomplete) {
       ].join(' ')
     }
 
-    formControls.addressDisplay.innerText = address
+    formControls.addressDisplay.innerText = formControls.input.value
     formControls.message.classList.add('show-message')
     // formControls.submitButton.removeAttribute('disabled')
     formControls.submitButton.dataset.disabled = false
