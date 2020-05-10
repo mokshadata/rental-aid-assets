@@ -94,30 +94,21 @@ function renderLocationChecker(formControls, autocomplete) {
   }
 }
 
-function updateState(formControls, autocomplete) {
-  var place = autocomplete.getPlace.call(autocomplete)
-  window.place = place
-  window.autocomplete = autocomplete
-  if (!place || !place.geometry) {
-    formControls.state.canVerify = false
-  } else {
-    formControls.state.canVerify = true
-  }
-  return formControls
-}
-
 function handleInputType(formControls, autocomplete) {
   return function (changeEvent) {
-    console.log('keypress')
-    updateState(formControls, autocomplete)
+    formControls.state.canVerify = false
     renderLocationChecker(formControls, autocomplete)
   }
 }
 
 function handlePlaceChange(formControls, autocomplete) {
   return function (changeEvent) {
-    console.log('place change')
-    updateState(formControls, autocomplete)
+    var place = autocomplete.getPlace.call(autocomplete)
+    if (!place.geometry) {
+      formControls.state.canVerify = false
+    } else {
+      formControls.state.canVerify = true
+    }
     renderLocationChecker(formControls, autocomplete)
   }
 }
