@@ -62,7 +62,7 @@ function handleLocationChecker(formControls, autocomplete) {
   }
 }
 
-function handlePlaceChange(formControl, autocomplete) {
+function handlePlaceChange(formControls, autocomplete) {
   return function (changeEvent) {
     var place = autocomplete.getPlace()
     if (!place.geometry) {
