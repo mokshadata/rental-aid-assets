@@ -36,12 +36,11 @@ function setupMonthly(el) {
   Array.prototype.forEach.call(rows, addMonthlyColumn)
 }
 
-function getHTMLForLocationCheckResponse(response) {
+function isValid(response) {
   if (response[0] === true) {
-    return '<div class="badge bg-success">Yes</div>'
-  } else if (response[0] === false) {
-    return '<div class="badge bg-danger">No</div>'
-  }
+    return true
+  } 
+  return false
 }
 
 function handleLocationChecker(formControls, autocomplete) {
@@ -61,35 +60,33 @@ function handleLocationChecker(formControls, autocomplete) {
 
     $.get(locationCheckerURL)
       .then(function (response) {
-        var answerHTML = getHTMLForLocationCheckResponse(response)
-        formControls.answer.innerHTML = answerHTML
-        formControls.submitButton.value = "Verified"
+        if (isValid(response)) {
+          formControls.submitButton.value = 'Yes'
+        } else {
+          formControls.submitButton.value = 'No'
+        }
       })
   }
 }
 
 function renderLocationChecker(formControls, autocomplete) {
   if (formControls.state.canVerify) {
-    if (formControls.submitButton.dataset.disabled === "false") {
+    if (
+      formControls.submitButton.value === 'Verify' &&
+      formControls.submitButton.dataset.disabled === 'false'
+    ) {
       return
     }
-    if (!formControls.message.classList.contains('show-messge')) {
-      formControls.message.classList.add('show-message')
-    }
-    formControls.addressDisplay.innerText = formControls.input.value
     formControls.submitButton.dataset.disabled = false
-    formControls.answer.innerHTML = ''
     formControls.submitButton.value = 'Verify'
   } else {
-    if (formControls.addressDisplay.innerText === 'address here') {
+    if (
+      formControls.submitButton.value === 'Verify' &&
+      formControls.submitButton.dataset.disabled === 'true'
+    ) {
       return
     }
-    if (formControls.message.classList.contains('show-messge')) {
-      formControls.message.classList.remove('show-message')
-    }
-    formControls.addressDisplay.innerText = 'address here'
     formControls.submitButton.dataset.disabled = true
-    formControls.answer.innerHTML = ''
     formControls.submitButton.value = 'Verify'
   }
 }
@@ -116,16 +113,10 @@ function handlePlaceChange(formControls, autocomplete) {
 function getFormEls(formEl) {
   var inputEl = formEl.querySelector('[name="address"]')
   var submitButtonEl = formEl.querySelector('[type=submit]')
-  var addressDisplayEl = document.querySelector('#address-display')
-  var messageEl = document.querySelector('#location-checker-message')
-  var answerEl = document.querySelector('#address-checker-answer')
   
   return {
     input: inputEl,
     submitButton: submitButtonEl,
-    addressDisplay: addressDisplayEl,
-    message: messageEl,
-    answer: answerEl,
     state: {
       canVerify: false
     }
