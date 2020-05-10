@@ -162,15 +162,16 @@
 }
 
 #address-checker input[type=submit][data-disabled=true][value="Yes"] {
-    background: #23a888;
+    /* background: #23a888;
     color: white;
-    border-color: #23a888;
+    border-color: #23a888; */
+    opacity: 1;
 }
 
 #address-checker input[type=submit][data-disabled=true][value="No"] {
-    background: #da4167;
-    color: white;
+    color: #da4167;
     border-color: #da4167;
+    opacity: 1;
 }
 
 .footer-links a {
