@@ -55,7 +55,7 @@ function handleLocationChecker(formControls, autocomplete) {
     formControls.submitButton.dataset.disabled = true
     formControls.submitButton.value = "Verifying..."
     var place = place = autocomplete.getPlace.call(autocomplete)
-    var locationCheckerURL = 'https://boundary-pip-beta.herokuapp.com/houston-pip?' +
+    var locationCheckerURL = 'https://boundary-pip.herokuapp.com/houston-pip?' +
       'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
 
     $.get(locationCheckerURL)
