@@ -78,6 +78,7 @@ function handlePlaceChange(formControls, autocomplete) {
       // window.alert("No details available for input: '" + place.name + "'");
       return;
     }
+    window.lastPlace = place
   
     var address = ''
     if (place.address_components) {
