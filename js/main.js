@@ -54,7 +54,7 @@ function handleLocationChecker(formControls, autocomplete) {
     }
 
     formControls.submitButton.dataset.disabled = true
-    formControls.submitButton.innerText = "Verifying"
+    formControls.submitButton.value = "Verifying..."
     var place = place = autocomplete.getPlace.call(autocomplete)
     var locationCheckerURL = 'https://boundary-pip-beta.herokuapp.com/houston-pip?' +
       'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
@@ -63,7 +63,7 @@ function handleLocationChecker(formControls, autocomplete) {
       .then(function (response) {
         var answerHTML = getHTMLForLocationCheckResponse(response)
         formControls.answer.innerHTML = answerHTML
-        formControls.submitButton.innerText = "Verified"
+        formControls.submitButton.value = "Verified"
       })
   }
 }
@@ -78,8 +78,9 @@ function renderLocationChecker(formControls, autocomplete) {
     }
     formControls.addressDisplay.innerText = formControls.input.value
     formControls.submitButton.dataset.disabled = false
+    formControls.answer.innerHTML = ''
   } else {
-    if (formControls.submitButton.dataset.disabled === "true") {
+    if (formControls.addressDisplay.innerText === 'address here') {
       return
     }
     if (formControls.message.classList.contains('show-messge')) {
@@ -87,6 +88,7 @@ function renderLocationChecker(formControls, autocomplete) {
     }
     formControls.addressDisplay.innerText = 'address here'
     formControls.submitButton.dataset.disabled = true
+    formControls.answer.innerHTML = ''
   }
 }
 
