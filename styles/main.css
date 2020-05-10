@@ -145,6 +145,10 @@
     transition: 200ms opacity linear;
 }
 
+#location-checker-message.show-message {
+    opacity: 1;
+}
+
 #location-checker-message.show {
     opacity: 1;
 }

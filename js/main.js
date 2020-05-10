@@ -49,7 +49,7 @@ function handleLocationChecker(formControls, autocomplete) {
     submitEvent.preventDefault()
     submitEvent.stopPropagation()
 
-    var place = autocomplete.getPlace()
+    var place = place = autocomplete.getPlace.call(autocomplete)
     var locationCheckerURL = 'https://boundary-pip-beta.herokuapp.com/houston-pip?' +
       'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
 
@@ -64,7 +64,9 @@ function handleLocationChecker(formControls, autocomplete) {
 
 function handlePlaceChange(formControls, autocomplete) {
   return function (changeEvent) {
-    var place = autocomplete.getPlace()
+    console.log('place changed')
+    var place = autocomplete.getPlace.call(autocomplete)
+    window.lastPlace = place
     if (!place.geometry) {
       // User entered the name of a Place that was not suggested and
       // pressed the Enter key, or the Place Details request failed.
@@ -82,7 +84,8 @@ function handlePlaceChange(formControls, autocomplete) {
     }
 
     formControls.addressDisplay.innerText = address
-    formControls.submitButton.setAttribute('disabled', false)
+    formControls.message.classList.add('show-message')
+    formControls.submitButton.removeAttribute('disabled')
   }
 }
 
@@ -90,8 +93,8 @@ function getFormEls(formEl) {
   var inputEl = formEl.querySelector('[name="address"]')
   var submitButtonEl = formEl.querySelector('[type=submit]')
   var addressDisplayEl = document.querySelector('#address-display')
-  var messageEl = formEl.querySelector('#location-checker-message')
-  var answerEl = formEl.querySelector('#address-checker-answer')
+  var messageEl = document.querySelector('#location-checker-message')
+  var answerEl = document.querySelector('#address-checker-answer')
   
   return {
     input: inputEl,
@@ -118,7 +121,7 @@ function setupLocationChecker(formEl) {
   autocomplete.setFields(
     ['address_components', 'geometry', 'icon', 'name'])
 
-  formControls.submitButton.setAttribute('disabled', true)
+  // formControls.submitButton.setAttribute('disabled', true)
   autocomplete.addListener('place_changed', handlePlaceChange(formControls, autocomplete))
   formEl.addEventListener('submit', handleLocationChecker(formControls, autocomplete))
 }
