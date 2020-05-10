@@ -66,7 +66,7 @@ function handleLocationChecker(formControls, autocomplete) {
   }
 }
 
-function handleInputChange(formControls, autocomplete) {
+function handleInputType(formControls, autocomplete) {
   return function (changeEvent) {
     var place = autocomplete.getPlace.call(autocomplete)
     console.log(place, 'change event')
@@ -135,7 +135,7 @@ function setupLocationChecker(formEl) {
   formControls.submitButton.dataset.disabled = true
   // formControls.submitButton.setAttribute('disabled', true)
   autocomplete.addListener('place_changed', handlePlaceChange(formControls, autocomplete))
-  formControls.input.addEventListener('change', handleInputChange(formControls, autocomplete))
+  formControls.input.addEventListener('keypress', handleInputType(formControls, autocomplete))
   formEl.addEventListener('submit', handleLocationChecker(formControls, autocomplete))
 }
 
