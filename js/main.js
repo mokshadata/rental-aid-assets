@@ -44,12 +44,12 @@ function getHTMLForLocationCheckResponse(response) {
   }
 }
 
-function handleLocationChecker(formControls) {
+function handleLocationChecker(formControls, autocomplete) {
   return function(submitEvent) {
     submitEvent.preventDefault()
     submitEvent.stopPropagation()
 
-    var place = formControls.autocomplete.getPlace()
+    var place = autocomplete.getPlace()
     var locationCheckerURL = 'https://boundary-pip-beta.herokuapp.com/houston-pip?' +
       'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
 
@@ -62,9 +62,9 @@ function handleLocationChecker(formControls) {
   }
 }
 
-function handlePlaceChange(formControls) {
+function handlePlaceChange(formControl, autocomplete) {
   return function (changeEvent) {
-    var place = formControls.autocomplete.getPlace()
+    var place = autocomplete.getPlace()
     if (!place.geometry) {
       // User entered the name of a Place that was not suggested and
       // pressed the Enter key, or the Place Details request failed.
@@ -105,7 +105,6 @@ function getFormEls(formEl) {
 function setupLocationChecker(formEl) {
   var formControls = getFormEls(formEl)
   var autocomplete = new google.maps.places.Autocomplete(formControls.input)
-  formControls.autocomplete = autocomplete
 
   // CoH northwest: 30.128310, -95.826341
   // CoH southeast: 29.485913, -95.028755
@@ -120,8 +119,8 @@ function setupLocationChecker(formEl) {
     ['address_components', 'geometry', 'icon', 'name'])
 
   formControls.submitButton.setAttribute('disabled', true)
-  autocomplete.addListener('place_changed', handlePlaceChange(formControls))
-  formEl.addEventListener('submit', handleLocationChecker(formControls))
+  autocomplete.addListener('place_changed', handlePlaceChange(formControls, autocomplete))
+  formEl.addEventListener('submit', handleLocationChecker(formControls, autocomplete))
 }
 
 function setupPage() {
