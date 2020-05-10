@@ -92,7 +92,7 @@ function renderLocationChecker(formControls, autocomplete) {
 
 function updateState(formControls, autocomplete) {
   var place = autocomplete.getPlace.call(autocomplete)
-  if (!place.geometry) {
+  if (!place || !place.geometry) {
     formControls.state.canVerify = false
   } else {
     formControls.state.canVerify = true
