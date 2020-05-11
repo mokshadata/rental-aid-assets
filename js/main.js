@@ -145,6 +145,15 @@ function setupLocationChecker(formEl) {
   formEl.addEventListener('submit', handleLocationChecker(formControls, autocomplete))
 }
 
+function setupQueryFills() {
+  var parameters = new URLSearchParams(location.search)
+
+  var confirmationNumberEl = document.querySelector('#confirmation-number')
+  if (confirmationNumberEl && parameters.get('confirmation-number')) {
+    confirmationNumberEl.innerText = 'Confirmation #' + parameters.get('confirmation-number')
+  }
+}
+
 function setupPage() {
   var amiTablesDOMNodes = document.querySelectorAll('.ami-table:not([data-processed])')
   Array.prototype.forEach.call(amiTablesDOMNodes, setupMonthly)
@@ -158,6 +167,7 @@ function setupPage() {
     setupLocationChecker(locationCheckerForm)
   }
 
+  setupQueryFills()
 }
 
 setupPage()
