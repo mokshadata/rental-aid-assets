@@ -148,9 +148,11 @@ function setupLocationChecker(formEl) {
 function setupQueryFills() {
   var parameters = new URLSearchParams(location.search)
 
-  var confirmationNumberEl = document.querySelector('.confirmation-number')
-  if (confirmationNumberEl && parameters.get('confirmation-number')) {
-    confirmationNumberEl.dataset.confirm = parameters.get('confirmation-number')
+  var confirmationNumberEls = document.querySelectorAll('.confirmation-number')
+  if (confirmationNumberEls && parameters.get('confirmation-number')) {
+    Array.prototype.forEach.call(confirmationNumberEls, function setupConfNum(el) {
+      el.dataset.confirm = parameters.get('confirmation-number')
+    })
   }
 
   if (parameters.get('language')) {
