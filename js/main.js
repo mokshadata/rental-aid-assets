@@ -148,9 +148,24 @@ function setupLocationChecker(formEl) {
 function setupQueryFills() {
   var parameters = new URLSearchParams(location.search)
 
-  var confirmationNumberEl = document.querySelector('#confirmation-number')
+  var confirmationNumberEl = document.querySelector('.confirmation-number')
   if (confirmationNumberEl && parameters.get('confirmation-number')) {
-    confirmationNumberEl.innerText = 'Confirmation #' + parameters.get('confirmation-number')
+    confirmationNumberEl.dataset.confirm = parameters.get('confirmation-number')
+  }
+
+  if (parameters.get('language')) {
+    var language = parameters.get('language')
+
+    if  (document.querySelector('#' + language + '.boxed')) {
+      var messageEls = document.querySelectorAll('.thank-you-message')
+      Array.prototype.forEach.call(messageEls, function setupLang(el) {
+        if (el.id === language) {
+          el.classList.remove('hide')
+        } else if (!el.classList.contains('hide')) {
+          el.classList.add('hide')
+        }
+      })
+    }
   }
 }
 
