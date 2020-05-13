@@ -178,6 +178,33 @@ function setupQueryFills() {
   }
 }
 
+function setupLangFromQuery() {
+  var parameters = new URLSearchParams(location.search)
+
+  if (parameters.get('language')) {
+    var language = parameters.get('language')
+
+    if  (document.querySelector('#' + language + '.boxed')) {
+      var messageEls = document.querySelectorAll('.thank-you-message')
+      Array.prototype.forEach.call(messageEls, function setupLang(el) {
+        if (el.id === language) {
+          el.classList.remove('hide')
+        } else if (!el.classList.contains('hide')) {
+          el.classList.add('hide')
+        }
+      })
+    } else {
+      var translator = document.querySelector('#google_translate_top select')
+
+      if (translator) {
+        translator.value = language.replace('_', '-')
+        translator.dispatchEvent(new Event('change'))
+      }
+    }
+  }
+}
+
+
 function handleActivators(targetTime, distInWords, timeRemaining) {
   return function(el) {
     if (el.parentElement.tagName === 'A') {
