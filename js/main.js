@@ -167,8 +167,115 @@ function setupQueryFills() {
           el.classList.add('hide')
         }
       })
+    } else {
+      var translator = document.querySelector('#google_translate_top select')
+
+      if (translator) {
+        translator.value = language.replace('_', '-')
+        translator.dispatchEvent(new Event('change'))
+      }
     }
   }
+}
+
+function handleActivators(targetTime, distInWords, timeRemaining) {
+  return function(el) {
+    if (el.parentElement.tagName === 'A') {
+      el.innerHTML = '<button class="bg-gray-3 button" disabled>Apply Today!</button>'
+    } else if (el.classList.length === 1) {
+      el.innerHTML = '<button class="bg-gray-3 button" disabled>Apply Today!</button>' +
+        '<div class="activator--message">' +
+          'Applications will open <strong><i>' + distInWords + '</i></strong>.<br/>This button will activate at 10 AM ' +
+          'without a page refresh.' + 
+        '</div>'
+    }
+    el.dataset.dist = distInWords
+  }
+}
+
+function setApplyButtons(targetTime, distInWords, timeRemaining) {
+  var applicationUrl = 'https://hhccommunity.force.com/tenant/s/'
+  return function(el) {
+    if (el.dataset.dist) {
+      delete el.dataset.dist
+    }
+    if (el.parentElement.tagName === 'A') {
+      el.parentElement.href = applicationUrl
+      el.innerHTML = '<button class="bg-danger button">Apply Now!</button>'
+    } else if(el.classList.length === 1) {
+      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Apply Now!</a>'
+    } else {
+      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Start Tenant Application Now!</a>'
+    }
+  }
+}
+
+function setupActivators() {
+  var activatorEls = document.querySelectorAll('.activator')
+  var hhMMSS = "10:00:00"
+  var targetTime = new Date("2020-05-13T" + hhMMSS + ".000-05:00")
+  var timeTolerance = 5 * 1000 // 5 seconds
+  var timeBuffer = -60 * 1000 // 1 minute
+  var timeToCount = 5 * 60 * 1000 // 5 minutes
+
+  var isRunning = true
+  var previousDist = null
+
+  function step() {
+    var nowDate = new Date()
+    var timeRemaining = dateFns.differenceInMilliseconds(
+      targetTime,
+      nowDate
+    )
+
+    var distInWords = ''
+    var seconds = null
+    
+    if (timeRemaining > timeToCount) {
+      distInWords = dateFns.distanceInWords(
+        nowDate,
+        targetTime,
+        {
+          includeSeconds: true,
+          addSuffix: true
+        }
+      )
+    } else {
+      seconds = (dateFns.differenceInSeconds(
+        targetTime,
+        nowDate
+      ) % 60)
+
+      if (seconds < 10) {
+        seconds = '0' + seconds
+      }
+      distInWords = 'in ' + dateFns.differenceInMinutes(
+        targetTime,
+        nowDate
+      ) + ':' + seconds
+    }
+
+    if (previousDist !== distInWords && timeRemaining > timeTolerance) {
+      Array.prototype.forEach.call(activatorEls, handleActivators(targetTime, distInWords, timeRemaining))
+      previousDist = distInWords
+    }
+    
+    if (timeRemaining <= timeTolerance) {
+      Array.prototype.forEach.call(activatorEls, setApplyButtons(targetTime, distInWords, timeRemaining))
+    }
+
+    if (timeRemaining > timeBuffer) {
+      window.requestAnimationFrame(step)
+    } else {
+      isRunning = false
+    }
+  }
+  window.requestAnimationFrame(step)
+  window.addEventListener('focus', function() {
+    if (isRunning) { return }
+    console.log('CHECKING')
+    step()
+  })
 }
 
 function setupPage() {
@@ -185,6 +292,7 @@ function setupPage() {
   }
 
   setupQueryFills()
+  setupActivators()
 }
 
 setupPage()

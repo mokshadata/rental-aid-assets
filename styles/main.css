@@ -181,3 +181,58 @@
 .confirmation-number::after {
     content: attr(data-confirm);
 }
+
+.activator[data-dist] {
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 2px solid #da4167;
+    margin: -2px;
+    padding: 2px;
+    max-width: 600px;
+}
+
+.activator .button:not([disabled]) {
+    background-color: #da4167;
+    color: #fff;
+    display: block;
+}
+
+.boxed .activator {
+    margin-top: 48px;
+}
+
+.activator--message {
+    margin-left: 12px;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.action-item .activator {
+    flex-wrap: wrap;
+}
+
+.action-item .activator button {
+    margin: auto;
+}
+
+.action-item .activator--message {
+    font-size: 14px;
+    line-height: 18px;
+    margin-left: 0;
+}
+
+.activator.badge[data-dist] {
+    position: relative;
+    max-width: none;
+    display: inline-block;
+}
+
+.activator.badge[data-dist]::after {
+    content: ' A button will activate here ' attr(data-dist) '.';
+}
+
+.activator.badge:not([data-dist]) {
+    background: transparent;
+    padding: 0;
+}
