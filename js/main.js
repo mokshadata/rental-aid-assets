@@ -244,12 +244,15 @@ function setApplyButtons(targetTime, distInWords, timeRemaining) {
           message + 
         '</div>'
     } else if (el.classList.length === 1) {
-      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Apply Now!</a>'
+      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Apply Now!</a>' +
         '<div class="activator--message">' +
           message + 
         '</div>'
     } else {
-      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Start Tenant Application Now!</a>' + message
+      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Start Tenant Application Now!</a>' +
+      '<div class="activator--message">' +
+        message + 
+      '</div>'
     }
   }
 }
