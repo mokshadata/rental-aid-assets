@@ -226,7 +226,7 @@ function setApplyButtons(targetTime, distInWords, timeRemaining) {
       delete el.dataset.dist
     }
 
-    var message = 'Due to the high volume of visitors to the website, we are slower than normal processing times. We appreciate your patience. '
+    var message = 'Due to the high volume of visitors to the website, we are experiencing slower than normal processing times. We appreciate your patience. '
     // if (el.parentElement.tagName === 'A') {
     //   el.parentElement.href = applicationUrl
     //   el.innerHTML = '<div class="bg-danger button">Apply Now!</div>'
