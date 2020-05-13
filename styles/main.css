@@ -192,7 +192,7 @@
     max-width: 600px;
 }
 
-.activator .button:not([disabled]) {
+.activator .button.bg-danger:not([disabled]) {
     background-color: #da4167;
     color: #fff;
     display: block;
@@ -212,8 +212,14 @@
     flex-wrap: wrap;
 }
 
-.action-item .activator button {
+.action-item .activator .button {
     margin: auto;
+}
+
+.action-item .activator .button.bg-gray-3 {
+    border-color: #f9f5ec;
+    background-color: #f9f5ec;
+    color: #2c2d36;
 }
 
 .action-item .activator--message {
