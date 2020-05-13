@@ -226,8 +226,7 @@ function setApplyButtons(targetTime, distInWords, timeRemaining) {
       delete el.dataset.dist
     }
 
-    var message = 'Due to the high volume of visitors to the website, we are experiencing technical difficulties. We appreciate your patience.'
-
+    var message = 'Due to the high volume of visitors to the website, we are slower than normal processing times. We appreciate your patience. '
     // if (el.parentElement.tagName === 'A') {
     //   el.parentElement.href = applicationUrl
     //   el.innerHTML = '<div class="bg-danger button">Apply Now!</div>'
@@ -238,18 +237,18 @@ function setApplyButtons(targetTime, distInWords, timeRemaining) {
     // }
 
     if (el.parentElement.tagName === 'A') {
-      el.parentElement.href = '#'
-      el.innerHTML = '<div class="bg-gray-3 button">On Pause</div> '+
+      el.parentElement.href = applicationUrl
+      el.innerHTML = '<div class="bg-danger button">Apply Now!</div>' +
         '<div class="activator--message">' +
           message + 
         '</div>'
     } else if (el.classList.length === 1) {
-      el.innerHTML = '<button class="bg-gray-3 button" disabled>On Pause</button>' +
+      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Apply Now!</a>'
         '<div class="activator--message">' +
           message + 
         '</div>'
     } else {
-      el.innerHTML = message
+      // el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Start Tenant Application Now!</a>'
     }
   }
 }
