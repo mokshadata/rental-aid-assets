@@ -248,7 +248,7 @@ function setApplyButtons(targetTime, distInWords, timeRemaining) {
           message + 
         '</div>'
     } else {
-      // el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Start Tenant Application Now!</a>'
+      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Start Tenant Application Now!</a>' + message
     }
   }
 }
