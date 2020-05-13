@@ -181,7 +181,7 @@ function setupQueryFills() {
 function handleActivators(targetTime, distInWords, timeRemaining) {
   return function(el) {
     if (el.parentElement.tagName === 'A') {
-      el.innerHTML = '<button class="bg-gray-3 button" disabled>Apply Today!</button>'
+      el.innerHTML = '<div class="bg-gray-3 button" disabled>Apply Today!</div>'
     } else if (el.classList.length === 1) {
       el.innerHTML = '<button class="bg-gray-3 button" disabled>Apply Today!</button>' +
         '<div class="activator--message">' +
@@ -201,7 +201,7 @@ function setApplyButtons(targetTime, distInWords, timeRemaining) {
     }
     if (el.parentElement.tagName === 'A') {
       el.parentElement.href = applicationUrl
-      el.innerHTML = '<button class="bg-danger button">Apply Now!</button>'
+      el.innerHTML = '<div class="bg-danger button">Apply Now!</div>'
     } else if(el.classList.length === 1) {
       el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Apply Now!</a>'
     } else {
