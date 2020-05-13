@@ -220,7 +220,8 @@ function handleActivators(targetTime, distInWords, timeRemaining) {
 }
 
 function setApplyButtons(targetTime, distInWords, timeRemaining) {
-  var applicationUrl = 'https://hhccommunity.force.com/tenant/s/'
+  // var applicationUrl = 'https://hhccommunity.force.com/tenant/s/'
+  var applicationUrl = 'https://hhccommunity.force.com/participation/s/'
   return function(el) {
     if (el.dataset.dist) {
       delete el.dataset.dist
