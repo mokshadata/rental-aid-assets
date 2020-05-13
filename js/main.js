@@ -181,7 +181,7 @@ function setupQueryFills() {
 function handleActivators(targetTime, distInWords, timeRemaining) {
   return function(el) {
     if (el.parentElement.tagName === 'A') {
-      el.innerHTML = '<div class="bg-gray-3 button" disabled>Apply Today!</div>'
+      el.innerHTML = '<div class="bg-gray-3 button">Apply Today!</div>'
     } else if (el.classList.length === 1) {
       el.innerHTML = '<button class="bg-gray-3 button" disabled>Apply Today!</button>' +
         '<div class="activator--message">' +
