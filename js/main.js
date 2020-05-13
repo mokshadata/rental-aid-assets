@@ -215,7 +215,7 @@ function setupActivators() {
   var hhMMSS = "10:00:00"
   var targetTime = new Date("2020-05-13T" + hhMMSS + ".000-05:00")
   var timeTolerance = 5 * 1000 // 5 seconds
-  var timeBuffer = -60 * 1000 // 1 minute
+  var timeBuffer = -5 * 60 * 1000 // 5 minutes
   var timeToCount = 5 * 60 * 1000 // 5 minutes
 
   var isRunning = true
