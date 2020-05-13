@@ -238,7 +238,7 @@
     content: ' A button will activate here ' attr(data-dist) '.';
 }
 
-.activator.badge:not([data-dist]) {
+/* .activator.badge:not([data-dist]) {
     background: transparent;
     padding: 0;
-}
+} */
