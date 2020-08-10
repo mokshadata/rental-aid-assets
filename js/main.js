@@ -117,14 +117,14 @@ setTimeout(function(){
 
 function setupAddressChecker() {
   var selectorsForAddressParts = {
-    line1: '#wf-form-Address-Self-Check input[name="line1"]',
-    city: '#wf-form-Address-Self-Check input[name="city"]',
-    zip: '#wf-form-Address-Self-Check input[name="zip"]',
-    autocomplete: '#wf-form-Address-Self-Check input[name="autocomplete"]',
+    line1: '#wf-form-self-address-check-round-2 input[name="line1"]',
+    city: '#wf-form-self-address-check-round-2 input[name="city"]',
+    zip: '#wf-form-self-address-check-round-2 input[name="zip"]',
+    autocomplete: '#wf-form-self-address-check-round-2 input[name="autocomplete"]',
     map: '#map'
   }
 
-  var selfCheckFormEl = document.querySelector('#wf-form-Address-Self-Check')
+  var selfCheckFormEl = document.querySelector('#wf-form-self-address-check-round-2')
   
   if (selfCheckFormEl) {
     selfCheckFormEl.addEventListener('submit', function (submitEvent) {
