@@ -196,7 +196,7 @@ function validateAddress(options) {
   if (!messageEl) {
     return
   }
-  console.log(resuts.mapParts)
+  console.log(options.mapParts)
   if (!options.mapParts.searchWithin) {
     if (options.formattedPlace &&
       options.formattedPlace.locality__political &&
