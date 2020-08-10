@@ -37,115 +37,6 @@ function setupMonthly(el) {
   Array.prototype.forEach.call(rows, addMonthlyColumn)
 }
 
-function isValid(response) {
-  if (response[0] === true) {
-    return true
-  } 
-  return false
-}
-
-function handleLocationChecker(formControls, autocomplete) {
-  return function(submitEvent) {
-    submitEvent.preventDefault()
-    submitEvent.stopPropagation()
-
-    if (formControls.submitButton.dataset.disabled === 'true') {
-      return
-    }
-
-    formControls.submitButton.dataset.disabled = true
-    formControls.submitButton.value = "Verifying..."
-    var place = place = autocomplete.getPlace.call(autocomplete)
-    var locationCheckerURL = 'https://boundary-pip.herokuapp.com/houston-pip?' +
-      'lat=' + place.geometry.location.lat() + '&lon=' + place.geometry.location.lng()
-
-    $.get(locationCheckerURL)
-      .then(function (response) {
-        if (isValid(response)) {
-          formControls.submitButton.value = 'Yes'
-        } else {
-          formControls.submitButton.value = 'No'
-        }
-      })
-  }
-}
-
-function renderLocationChecker(formControls, autocomplete) {
-  if (formControls.state.canVerify) {
-    if (
-      formControls.submitButton.value === 'Verify' &&
-      formControls.submitButton.dataset.disabled === 'false'
-    ) {
-      return
-    }
-    formControls.submitButton.dataset.disabled = false
-    formControls.submitButton.value = 'Verify'
-  } else {
-    if (
-      formControls.submitButton.value === 'Verify' &&
-      formControls.submitButton.dataset.disabled === 'true'
-    ) {
-      return
-    }
-    formControls.submitButton.dataset.disabled = true
-    formControls.submitButton.value = 'Verify'
-  }
-}
-
-function handleInputType(formControls, autocomplete) {
-  return function (changeEvent) {
-    formControls.state.canVerify = false
-    renderLocationChecker(formControls, autocomplete)
-  }
-}
-
-function handlePlaceChange(formControls, autocomplete) {
-  return function (changeEvent) {
-    var place = autocomplete.getPlace.call(autocomplete)
-    if (!place.geometry) {
-      formControls.state.canVerify = false
-    } else {
-      formControls.state.canVerify = true
-    }
-    renderLocationChecker(formControls, autocomplete)
-  }
-}
-
-function getFormEls(formEl) {
-  var inputEl = formEl.querySelector('[name="address"]')
-  var submitButtonEl = formEl.querySelector('[type=submit]')
-  
-  return {
-    input: inputEl,
-    submitButton: submitButtonEl,
-    state: {
-      canVerify: false
-    }
-  }
-}
-
-function setupLocationChecker(formEl) {
-  var formControls = getFormEls(formEl)
-  var autocomplete = new google.maps.places.Autocomplete(formControls.input)
-
-  // CoH northwest: 30.128310, -95.826341
-  // CoH southeast: 29.485913, -95.028755
-  autocomplete.setBounds({
-    north: 30.128310,
-    east: -95.028755,
-    south: 29.485913,
-    west: -95.826341
-  })
-
-  autocomplete.setFields(
-    ['address_components', 'geometry', 'icon', 'name'])
-
-  formControls.submitButton.dataset.disabled = true
-  autocomplete.addListener('place_changed', handlePlaceChange(formControls, autocomplete))
-  formControls.input.addEventListener('keypress', handleInputType(formControls, autocomplete))
-  formEl.addEventListener('submit', handleLocationChecker(formControls, autocomplete))
-}
-
 function setupLangFromQuery() {
   var parameters = new URLSearchParams(location.search)
 
@@ -171,6 +62,7 @@ function setupLangFromQuery() {
     }
   }
 }
+
 function setupQueryFills() {
   var parameters = new URLSearchParams(location.search)
 
@@ -204,127 +96,6 @@ function setupQueryFills() {
   }
 }
 
-function handleActivators(targetTime, distInWords, timeRemaining) {
-  return function(el) {
-    if (el.parentElement.tagName === 'A') {
-      el.innerHTML = '<div class="bg-gray-3 button">Apply Today!</div>'
-    } else if (el.classList.length === 1) {
-      el.innerHTML = '<button class="bg-gray-3 button" disabled>Apply Today!</button>' +
-        '<div class="activator--message">' +
-          'Applications will open <strong><i>' + distInWords + '</i></strong>.<br/>This button will activate at 10 AM ' +
-          'without a page refresh.' + 
-        '</div>'
-    }
-    el.dataset.dist = distInWords
-  }
-}
-
-function setApplyButtons(targetTime, distInWords, timeRemaining) {
-  // var applicationUrl = 'https://hhccommunity.force.com/tenant/s/'
-  var applicationUrl = 'https://hhccommunity.force.com/participation/s/'
-  return function(el) {
-    if (el.dataset.dist) {
-      delete el.dataset.dist
-    }
-
-    var message = 'Due to the high volume of visitors to the website, we are experiencing slower than normal processing times. We appreciate your patience. '
-    // if (el.parentElement.tagName === 'A') {
-    //   el.parentElement.href = applicationUrl
-    //   el.innerHTML = '<div class="bg-danger button">Apply Now!</div>'
-    // } else if(el.classList.length === 1) {
-    //   el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Apply Now!</a>'
-    // } else {
-    //   el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Start Tenant Application Now!</a>'
-    // }
-
-    if (el.parentElement.tagName === 'A') {
-      el.parentElement.href = applicationUrl
-      el.innerHTML = '<div class="bg-danger button">Apply Now!</div>' +
-        '<div class="activator--message">' +
-          message + 
-        '</div>'
-    } else if (el.classList.length === 1) {
-      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Apply Now!</a>' +
-        '<div class="activator--message">' +
-          message + 
-        '</div>'
-    } else {
-      el.innerHTML = '<a class="bg-danger button" href="' + applicationUrl + '">Start Tenant Application Now!</a>' +
-      '<div class="activator--message">' +
-        message + 
-      '</div>'
-    }
-  }
-}
-
-function setupActivators() {
-  var activatorEls = document.querySelectorAll('.activator')
-  var hhMMSS = "10:00:00"
-  var targetTime = new Date("2020-05-13T" + hhMMSS + ".000-05:00")
-  var timeTolerance = 5 * 1000 // 5 seconds
-  var timeBuffer = -10 * 60 * 1000 // 10 minutes
-  var timeToCount = 5 * 60 * 1000 // 5 minutes
-
-  var isRunning = true
-  var previousDist = null
-
-  function step() {
-    var nowDate = new Date()
-    var timeRemaining = dateFns.differenceInMilliseconds(
-      targetTime,
-      nowDate
-    )
-
-    var distInWords = ''
-    var seconds = null
-    
-    if (timeRemaining > timeToCount) {
-      distInWords = dateFns.distanceInWords(
-        nowDate,
-        targetTime,
-        {
-          includeSeconds: true,
-          addSuffix: true
-        }
-      )
-    } else {
-      seconds = (dateFns.differenceInSeconds(
-        targetTime,
-        nowDate
-      ) % 60)
-
-      if (seconds < 10) {
-        seconds = '0' + seconds
-      }
-      distInWords = 'in ' + dateFns.differenceInMinutes(
-        targetTime,
-        nowDate
-      ) + ':' + seconds
-    }
-
-    if (previousDist !== distInWords && timeRemaining > timeTolerance) {
-      Array.prototype.forEach.call(activatorEls, handleActivators(targetTime, distInWords, timeRemaining))
-      previousDist = distInWords
-    }
-    
-    if (timeRemaining <= timeTolerance) {
-      Array.prototype.forEach.call(activatorEls, setApplyButtons(targetTime, distInWords, timeRemaining))
-    }
-
-    if (timeRemaining > timeBuffer) {
-      window.requestAnimationFrame(step)
-    } else {
-      isRunning = false
-    }
-  }
-  window.requestAnimationFrame(step)
-  window.addEventListener('focus', function() {
-    if (isRunning) { return }
-    console.log('CHECKING')
-    step()
-  })
-}
-
 function setupPage() {
   var amiTablesDOMNodes = document.querySelectorAll('.ami-table:not([data-processed])')
   Array.prototype.forEach.call(amiTablesDOMNodes, setupMonthly)
@@ -333,13 +104,7 @@ function setupPage() {
   var currencyNumeral = document.querySelectorAll('.currency-numeral')
   Array.prototype.forEach.call(currencyNumeral, formatCurrency)
 
-  var locationCheckerForm = document.querySelector('#address-checker')
-  if (locationCheckerForm) {
-    setupLocationChecker(locationCheckerForm)
-  }
-
   setupQueryFills()
-  setupActivators()
 }
 
 setupPage()
@@ -349,3 +114,114 @@ setTimeout(function(){
 }, 1000)
 
 })()
+
+function setupAddressChecker() {
+  var selectorsForAddressParts = {
+    line1: '#wf-form-Address-Self-Check input[name="line1"]',
+    city: '#wf-form-Address-Self-Check input[name="city"]',
+    zip: '#wf-form-Address-Self-Check input[name="zip"]',
+    autocomplete: '#wf-form-Address-Self-Check input[name="autocomplete"]',
+    map: '#map'
+  }
+
+  var selfCheckFormEl = document.querySelector('#wf-form-Address-Self-Check')
+  
+  if (selfCheckFormEl) {
+    selfCheckFormEl.addEventListener('submit', function (submitEvent) {
+      submitEvent.preventDefault()
+    })
+  
+    document.querySelector(selectorsForAddressParts.autocomplete).type = 'search'
+  
+    setupLocationChecker(selectorsForAddressParts, {
+      handleInvalidAddress: handleBadInput,
+      handleValidAddress: validateAddress
+    })
+
+    return
+  }
+
+  var applicationFormEl = document.querySelector('#application-form')
+
+  if (applicationFormEl && setupApplicationForm) {
+    setupApplicationForm()
+    return
+  }
+  if (
+    document.querySelector(selectorsForAddressParts.map) &&
+    !document.querySelector(selectorsForAddressParts.autocomplete) &&
+    initMap
+  ) {
+    initMap({ map: document.querySelector(selectorsForAddressParts.map)})
+  }
+}
+
+function handleBadInput(options) {
+  var formattedPlace = options.formattedPlace
+  var place = options.place
+  var inputs = options.inputs
+  var mapParts = options.mapParts
+}
+
+function getSuccessMessageHTML(options) {
+  var formattedPlace = options.formattedPlace
+  var place = options.place
+  var inputs = options.inputs
+  var mapParts = options.mapParts
+  var line1 = formattedPlace.street_number.short_name + ' ' + formattedPlace.route.short_name
+  return '<div class="alert_6"><div class="alert_content_wrap"><img src="https://assets.website-files.com/5cbc1cadfad96c3229989372/5ce9f7abc0831c3acc68fd41_check-white.svg" width="14" alt="" class="alert_icon"><div class="alert_line_2"></div><div class="paragraph-2-a white-text">' +
+    'The address <strong>' + line1 + '</strong> is within the City of Houston.  You meet one of <a href="#eligibility">four requirements</a> to apply.' +
+    '</div></div></div>'
+}
+
+function getInvalidMessageHTML(options) {
+  var formattedPlace = options.formattedPlace
+  var place = options.place
+  var inputs = options.inputs
+  var mapParts = options.mapParts
+  var line1 = formattedPlace.street_number.short_name + ' ' + formattedPlace.route.short_name
+  return '<div class="alert_error"><div class="alert_content_wrap"><img src="https://assets.website-files.com/5cbc1cadfad96c3229989372/5ce9f7ab8cdd2142b971f_alert-circle-white.svg" width="16" alt="" class="alert_icon"><div class="alert_line_2"></div><div class="paragraph-2-a white-text">' +
+    'The address <strong>' + line1 + '</strong> is not within the the City of Houston service area. Please see <a href="./faqs#outside-harris-assistance">FAQs</a> for other options.' +
+    '</div></div></div>'
+}
+
+function validateAddress(options) {
+  var formattedPlace = options.formattedPlace
+  var place = options.place
+  var inputs = options.inputs
+  var mapParts = options.mapParts
+
+  var messageEl = document.querySelector('#location-checker .result-message')
+  var latLng = results.place.geometry.location.toJSON()
+  if (!messageEl) {
+    return
+  }
+  console.log(resuts.mapParts)
+  if (!results.mapParts.searchWithin) {
+    if (results.formattedPlace &&
+      results.formattedPlace.locality__political &&
+      results.formattedPlace.locality__political.long_name &&
+      results.formattedPlace.locality__political.long_name == 'the City of Houston') {
+      messageEl.innerHTML = getSuccessMessageHTML(options)
+      return
+    } else {
+      messageEl.innerHTML = getInvalidMessageHTML(options)
+      return
+    }
+  }
+
+  var points = turf.points([
+    [latLng.lng, latLng.lat]
+  ])
+
+  var ptsWithin = turf.pointsWithinPolygon(points, results.mapParts.searchWithin)
+  if (
+    (ptsWithin.features && ptsWithin.features.length)
+  ) {
+    messageEl.innerHTML = getSuccessMessageHTML(options)
+    return
+  } else {
+    messageEl.innerHTML = getInvalidMessageHTML(options)
+    return
+  }
+}
