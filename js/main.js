@@ -182,7 +182,7 @@ function getInvalidMessageHTML(options) {
   var mapParts = options.mapParts
   var line1 = formattedPlace.street_number.short_name + ' ' + formattedPlace.route.short_name
   return '<div class="alert_error"><div class="alert_content_wrap"><img src="https://assets.website-files.com/5cbc1cadfad96c3229989372/5ce9f7ab8cdd2142b971f_alert-circle-white.svg" width="16" alt="" class="alert_icon"><div class="alert_line_2"></div><div class="paragraph-2-a white-text">' +
-    'The address <strong>' + line1 + '</strong> is not within the the City of Houston service area. Please see <a href="./faqs#outside-harris-assistance">FAQs</a> for other options.' +
+    'The address <strong>' + line1 + '</strong> is not within the the City of Houston service area.' +
     '</div></div></div>'
 }
 
@@ -197,12 +197,11 @@ function validateAddress(options) {
   if (!messageEl) {
     return
   }
-  console.log(options.formattedPlace)
   if (!options.mapParts.searchWithin) {
     if (options.formattedPlace &&
       options.formattedPlace.locality__political &&
       options.formattedPlace.locality__political.long_name &&
-      options.formattedPlace.locality__political.long_name == 'the City of Houston') {
+      options.formattedPlace.locality__political.long_name == 'Houston') {
       messageEl.innerHTML = getSuccessMessageHTML(options)
       return
     } else {
