@@ -136,7 +136,7 @@ function initMap(inputs) {
   marker.setOpacity(0)
   marker.addTo(map)
 
-  fetch('https://mokshadata.gitlab.io/rental-aid-assets/data/coh.geojson')
+  fetch('https://mokshadata.github.io/rental-aid-assets/data/coh.geojson')
     .then(function (response){ return response.json() })
     .then(function (data) {
       L.geoJSON(data, {
