@@ -129,6 +129,7 @@ function setupAddressChecker() {
   if (selfCheckFormEl) {
     selfCheckFormEl.addEventListener('submit', function (submitEvent) {
       submitEvent.preventDefault()
+      submitEvent.stopPropagation()
     })
   
     document.querySelector(selectorsForAddressParts.autocomplete).type = 'search'
@@ -196,7 +197,7 @@ function validateAddress(options) {
   if (!messageEl) {
     return
   }
-  console.log(options.mapParts)
+  console.log(options.formattedPlace)
   if (!options.mapParts.searchWithin) {
     if (options.formattedPlace &&
       options.formattedPlace.locality__political &&
