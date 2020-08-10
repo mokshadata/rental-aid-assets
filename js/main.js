@@ -192,16 +192,16 @@ function validateAddress(options) {
   var mapParts = options.mapParts
 
   var messageEl = document.querySelector('#location-checker .result-message')
-  var latLng = results.place.geometry.location.toJSON()
+  var latLng = options.place.geometry.location.toJSON()
   if (!messageEl) {
     return
   }
   console.log(resuts.mapParts)
-  if (!results.mapParts.searchWithin) {
-    if (results.formattedPlace &&
-      results.formattedPlace.locality__political &&
-      results.formattedPlace.locality__political.long_name &&
-      results.formattedPlace.locality__political.long_name == 'the City of Houston') {
+  if (!options.mapParts.searchWithin) {
+    if (options.formattedPlace &&
+      options.formattedPlace.locality__political &&
+      options.formattedPlace.locality__political.long_name &&
+      options.formattedPlace.locality__political.long_name == 'the City of Houston') {
       messageEl.innerHTML = getSuccessMessageHTML(options)
       return
     } else {
@@ -214,7 +214,7 @@ function validateAddress(options) {
     [latLng.lng, latLng.lat]
   ])
 
-  var ptsWithin = turf.pointsWithinPolygon(points, results.mapParts.searchWithin)
+  var ptsWithin = turf.pointsWithinPolygon(points, options.mapParts.searchWithin)
   if (
     (ptsWithin.features && ptsWithin.features.length)
   ) {
